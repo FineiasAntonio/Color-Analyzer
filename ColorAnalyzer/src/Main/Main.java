@@ -8,9 +8,11 @@ import javax.swing.JFileChooser;
 
 public class Main {
     public static void main(String[] args) {
+
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        File image = new File("src\\Main\\Images\\clouds.jpg");
+        File image = new File(chooser.getSelectedFile().getAbsolutePath());
+
 
         try {
             List<Cor> ranking = Rank.rankear(ImageReader.lerPixels(image));
@@ -23,6 +25,8 @@ public class Main {
             }
         } catch (IOException e) {
             System.out.println("Error! the archive may be corrupted or was not found");
+        } catch (NullPointerException e) {
+            System.out.println("Error! Please choose an archive with valid photo extension");
         }
     }
 }
