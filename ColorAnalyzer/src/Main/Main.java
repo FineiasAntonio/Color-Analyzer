@@ -3,30 +3,33 @@ package Main;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import javax.swing.JFileChooser;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File image = new File(chooser.getSelectedFile().getAbsolutePath());
-
+        File image = new File(FrameSetting.chooseFile());
 
         try {
-            List<Cor> ranking = Rank.rankear(ImageReader.lerPixels(image));
+            List<Cor> ranking = ImageReader.lerPixels(image).stream()
+                                                            .sorted(Cor::compareTo)
+                                                            .limit(10)
+                                                            .collect(Collectors.toList());
+
             System.out.println("Frequency of Colors");
-            System.out.println("Archive: " + image.getName());
+            System.out.println("File: " + image.getName());
             System.out.println("-----------------------------");
 
             for (Cor cor : ranking) {
                 System.out.println("Color(hex): " + cor.getCódigoCor() + " | " + String.format("%.2f", cor.getFrequency()) + "%");
             }
+            
         } catch (IOException e) {
-            System.out.println("Error! the archive may be corrupted or was not found");
+            FrameSetting.Error("Error! the file may be corrupted or was not found");
+            FrameSetting.chooseFile();
         } catch (NullPointerException e) {
-            System.out.println("Error! Please choose an archive with valid photo extension");
+            FrameSetting.Error("Error! you must select a file with a valid image extension");
+            FrameSetting.chooseFile();
         }
+        System.exit(0);
     }
 }

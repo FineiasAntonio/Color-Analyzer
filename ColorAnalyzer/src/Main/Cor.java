@@ -1,6 +1,6 @@
 package Main;
 
-public class Cor {
+public class Cor implements Comparable<Cor>{
     private String códigoCor;
     private Integer quantidade = 1;
     private float frequency;
@@ -68,6 +68,8 @@ public class Cor {
         this.quantidade = quantidade;
     }
 
-    
-    
+    @Override
+    public int compareTo(Cor o) {
+        return -this.quantidade.compareTo(o.quantidade);
+    }
 }
