@@ -17,14 +17,14 @@ public class Cor implements Comparable<Cor>{
         this.códigoCor = códigoCor;
     }
 
-    public Cor(String códigoCor, Integer quantidade, float frequency) {
+    public Cor(String códigoCor, int quantidade, float frequency) {
         this.códigoCor = códigoCor;
         this.quantidade = quantidade;
         this.frequency = frequency;
     }
 
     public static String toHex(int i){
-        return "0x"+Integer.toHexString(i).toUpperCase();
+        return "#"+Integer.toHexString(i).toUpperCase();
     }
 
     public String getCódigoCor() {
