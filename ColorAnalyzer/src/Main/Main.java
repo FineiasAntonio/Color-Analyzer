@@ -37,14 +37,10 @@ public class Main {
     }
 
     public static void setFrRel(List<Cor> list){
-        
-        float frAbs = 0;
-        for (Cor cor : list) {
-            frAbs += cor.getFrequency();
-        }
-
-        for (Cor cor : list) {
-            cor.setFrequency((cor.getFrequency()*100)/frAbs);
-        }
+        Float frAbs = (float) list.stream()
+                                  .mapToDouble(Cor::getFrequency)
+                                  .sum();
+                                  
+        list.forEach(Cor -> Cor.setFrequency((Cor.getFrequency()*100)/frAbs));
     }
 }
