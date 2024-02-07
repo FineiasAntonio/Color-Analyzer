@@ -1,3 +1,3 @@
-# My Learning Projects
+# Color Analyzer
 
- This repository was created for my learning path programs with java developent with a variety of programs without connections between them
+ A simple app to return the color frequency of a image that user have uploaded
